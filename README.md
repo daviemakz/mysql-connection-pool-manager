@@ -1,0 +1,2 @@
+# mysql-connection-pool-manager
+This is a Node.JS API wrapper which allows for intelligent management &amp; load balancing mysql connection pools. Its designed to be used by persistent and self-terminating processes. For example, most connection pools keep connections open for the duration of the process, and relies on the mysql server terminating the process. With this module you can manage the connection count and release unused mysql connections amoungst other things.
