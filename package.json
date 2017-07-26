@@ -1,0 +1,25 @@
+{
+  "name": "mysql-pool-controller",
+  "version": "1.0.0",
+  "description": "This is a Node.JS API wrapper which allows for intelligent management & load balancing mysql connection pools.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daviemakz/mysql-connection-pool-manager.git"
+  },
+  "keywords": [
+    "mysql",
+    "connection",
+    "pool",
+    "manager"
+  ],
+  "author": "David Makuni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daviemakz/mysql-connection-pool-manager/issues"
+  },
+  "homepage": "https://github.com/daviemakz/mysql-connection-pool-manager#readme"
+}
