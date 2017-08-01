@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/daviemakz/mysql-connection-pool-manager/issues"
   },
-  "homepage": "https://github.com/daviemakz/mysql-connection-pool-manager#readme"
+  "homepage": "https://github.com/daviemakz/mysql-connection-pool-manager#readme",
+  "dependencies": {
+    "async": "^2.5.0",
+    "crypto": "0.0.3",
+    "mysql": "^2.14.0",
+    "util": "^0.10.3"
+  }
 }
