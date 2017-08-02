@@ -1,21 +1,5 @@
 "use strict";
 
-/*
-
-Below is an example of the options file you have to pass to the module:
-
-options = {
-  idleCheckInterval: ,
-  maxConnextionTimeout: ,
-  idleTimeout: ,
-  errorLimit: ,
-  preInitDelay: ,
-  sessionTimeout: ,
-  mysqlSettings:
-}
-
-*/
-
 // Load library modules
 const Core = require('./lib/pool');
 
