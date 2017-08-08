@@ -14,7 +14,7 @@ class Instance extends Core {
     this.config = this.config.bind(this);
     // Build configuration
     this.config(options);
-  };
+  }
 
   // Function: Assign settings
   config(options) {
@@ -22,20 +22,26 @@ class Instance extends Core {
     const props = ['idleTimeout', 'errorLimit', 'preInitDelay', 'sessionTimeout'];
     // Validation configuration
     Object(options).keys.forEach(prop => {
-      if (!props.includes(prop)) { throw new Error(`The required property ${prop} is not defined!`); }
-      if (typeof(prop) !== 'number') { throw new Error(`The property ${prop} is not a number!`); }
+      if(!props.includes(prop)) {
+        throw new Error(
+          `The required property ${prop} is not defined!`);
+      }
+      if(typeof(prop) !== 'number') {
+        throw new Error(
+          `The property ${prop} is not a number!`);
+      }
     });
-    // Check mysql settings are defined (we wont check if they are correct, mysql will do that!)
-    if (typeof(options.mysqlSettings) !== 'object') {
+    // Check mysql settings are defined
+    if(typeof(options.mysqlSettings) !== 'object') {
       throw new Error(`MySQL settings are not defined or not an object!`);
     }
     // Spread options to this
     this.options = Object.assign({}, options);
     // Return
     return;
-  };
+  }
 
-};
+}
 
 // Exports
 module.exports = (options) => new Instance(options);
