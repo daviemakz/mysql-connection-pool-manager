@@ -4,7 +4,8 @@
   "description": "This is a Node.JS API wrapper which allows for intelligent management & load balancing mysql connection pools.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "pretest": "cd ./test/ && bash setup.sh && node run-tests.js -i initial && cd ./../",
+    "test": "cd ./test/ && node run-tests.js -a"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,10 @@
     "crypto": "0.0.3",
     "mysql": "^2.14.0",
     "util": "^0.10.3"
+  },
+  "devDependencies": {
+    "graceful-fs": "^4.1.11",
+    "mocha": "^3.5.0",
+    "path": "^0.12.7"
   }
 }

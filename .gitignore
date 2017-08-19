@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Hide docker setup file
+test/docker.local.setup
+
 # Example scripts
 eg
 
