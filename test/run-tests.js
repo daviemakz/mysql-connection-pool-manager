@@ -3,13 +3,13 @@
 /* This is the core file for running tests in the daemon programmically... */
 
 // Modules
-var MC = require('mocha');
-var FS = require('graceful-fs');
-var PT = require('path');
+const MC = require('mocha');
+const FS = require('graceful-fs');
+const PT = require('path');
 
 // Base Test Configuration File
-var MochaInstanceAll = new MC();
-var DirectoryAll = ['./mocha/'];
+const MochaInstanceAll = new MC();
+const DirectoryAll = ['./mocha/'];
 
 // Get all mocha test files
 DirectoryAll.forEach(function(element, index, array) {
