@@ -103,13 +103,13 @@ Below are the options available to tweak the behaviour of the pool manager:
 
 Here is a list of available methods:
 
-* checkPool(pool): Checks the status of the connection pool. Returns `boolean`.
-* closePool(pool):  Closes the connection pool. Returns `undefined`.
-* closePoolNow(callback): Close the currently active connection pool.  Returns `undefined`.
-* createPool(mySQLSettings):  Creates a connection pool. Returns `instance`.
-* escapeValue(data): In order to avoid SQL injection attacks, you should always escape any user provided data. Returns `string`.
-* query(sql):  This method allows you to perform a query. Returns `(result = [], error = {})`.
-* config(options): Allows you to change the instance / mySQL settings of an instance. Returns `undefined`.
+* `checkPool(pool)`: Checks the status of the connection pool. Returns `boolean`.
+* `closePool(pool)`:  Closes the connection pool. Returns `undefined`.
+* `closePoolNow(callback)`: Close the currently active connection pool.  Returns `undefined`.
+* `createPool(mySQLSettings)`:  Creates a connection pool. Returns `instance`.
+* `escapeValue(data)`: In order to avoid SQL injection attacks, you should always escape any user provided data. Returns `string`.
+* `query(sql)`:  This method allows you to perform a query. Returns `(result = [], error = {})`.
+* `config(options)`: Allows you to change the instance / mySQL settings of an instance. Returns `undefined`.
 
 # Basic Usage
 
