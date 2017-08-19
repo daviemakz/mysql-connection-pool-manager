@@ -111,6 +111,45 @@ Here is a list of available methods:
 * `query(sql)`:  This method allows you to perform a query. Returns `(result = [], error = {})`.
 * `config(options)`: Allows you to change the instance / mySQL settings of an instance. Returns `undefined`.
 
+You can also access the [mysqljs/mysql](https://github.com/mysqljs/mysql) directly like so...
+
+```
+"use strict"
+
+// Load modules
+const PoolManager = require('mysql-connection-pool-manager');
+
+// Options
+const options = {
+  ...example settings
+}
+
+// Initialising the instance
+const mySQL = PoolManager(options);
+
+// Accessing mySQL directly
+var connection = mySQL.raw.createConnection({
+  host     : 'localhost',
+  user     : 'me',
+  password : 'secret',
+  database : 'my_db'
+});
+
+// Initialising connection
+connection.connect();
+
+// Performing query
+connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+
+// Ending connection
+connection.end();
+```
+
+...and you can still use the module normally!
+
 # Basic Usage
 
 ## Simple Insertion Script
