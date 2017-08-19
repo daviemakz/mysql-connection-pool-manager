@@ -4,8 +4,8 @@
   "description": "This is a Node.JS API wrapper which allows for intelligent management & load balancing mysql connection pools.",
   "main": "index.js",
   "scripts": {
-    "pretest": "cd ./test/ && bash setup.sh && node run-tests.js -i initial && cd ./../",
-    "test": "cd ./test/ && node run-tests.js -a"
+    "pretest": "cd ./test/ && bash setup.sh && cd ./../",
+    "test": "cd ./test/ && node start-test.js"
   },
   "repository": {
     "type": "git",

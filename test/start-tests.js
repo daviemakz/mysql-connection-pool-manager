@@ -31,4 +31,5 @@ function RUN_ALL() {
   });
 }
 
+// Run tests...
 RUN_ALL();
