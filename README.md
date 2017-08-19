@@ -1,6 +1,6 @@
 # MySQL Connection Pool Manager
 
-This is a production level Node.JS API wrapper which allows for intelligent management &amp; load balancing mySQL connection pools. Its designed to be used by persistent and self-terminating processes.  
+This is a production level Node.JS mySQL wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql). This module allows for intelligent management &amp; load balancing of mySQL connection pools. It is written in JavaScript, does not require compiling, and is MIT licensed. Its designed to be used by persistent and self-terminating processes.  
 
 For example, most connection pools keep connections open for the duration of the process, and relies on the mySQL server terminating the process. With this module you can manage the connection count and release unused mySQL connections amongst other things.  
 
@@ -12,25 +12,133 @@ To install run the following command in the terminal:
 
 # Features
 
-This module is designed to be highly flexible with exported internal functions which you can utilise to create your own custom scripts or change the behaviour of the module. The module supports instancing so you can create as many as you want.
+This module is designed to be highly flexible with exported internal functions which you can utilise to create your own custom scripts or change the behaviour of the module. The module supports instancing so you can create as many as you want. You could even setup a JavaScript powered mySQL cluster where your application natively load balances between two instances, the possibilities are endless.
 
-# Configuration
+* Fully powered by [mysqljs/mysql](https://github.com/mysqljs/mysql) under the hood.  
+* Will automatically close all connections after an elapsed time, allowing scripts to exit properly.  
+* Intelligent and configurable connection management, load balancing & termination.  
+* Highly customisable instance which allows changes in instance configuration after initialisation.  
+* Ability to change mySQL settings during execution, module will connect on next query database.  
+* Lightning fast query response time due to keeping connections primed for the next request.  
+* Completely asynchronous so no thread blocking & can handle high throughput situations.  
+* Extensively mocha tested and already in use in a production environment.  
 
-Below is a list of configuration options which you must pass when initialising an instance:
+# MySQL Configuration Options
+
+When establishing a connection, you can set the following options:
+
+* `host`: The hostname of the database you are connecting to. (Default:
+  `localhost`)
+* `port`: The port number to connect to. (Default: `3306`)
+* `localAddress`: The source IP address to use for TCP connection. (Optional)
+* `socketPath`: The path to a unix domain socket to connect to. When used `host`
+  and `port` are ignored.
+* `user`: The MySQL user to authenticate as.
+* `password`: The password of that MySQL user.
+* `database`: Name of the database to use for this connection (Optional).
+* `charset`: The charset for the connection. This is called "collation" in the SQL-level
+  of MySQL (like `utf8_general_ci`). If a SQL-level charset is specified (like `utf8mb4`)
+  then the default collation for that charset is used. (Default: `'UTF8_GENERAL_CI'`)
+* `timezone`: The timezone configured on the MySQL server. This is used to type cast server date/time values to JavaScript `Date` object and vice versa. This can be `'local'`, `'Z'`, or an offset in the form `+HH:MM` or `-HH:MM`. (Default: `'local'`)
+* `connectTimeout`: The milliseconds before a timeout occurs during the initial connection
+  to the MySQL server. (Default: `10000`)
+* `stringifyObjects`: Stringify objects instead of converting to values. (Default: `false`)
+* `insecureAuth`: Allow connecting to MySQL instances that ask for the old
+  (insecure) authentication method. (Default: `false`)
+* `typeCast`: Determines if column values should be converted to native
+   JavaScript types. (Default: `true`)
+* `queryFormat`: A custom query format function.
+* `supportBigNumbers`: When dealing with big numbers (BIGINT and DECIMAL columns) in the database,
+  you should enable this option (Default: `false`).
+* `bigNumberStrings`: Enabling both `supportBigNumbers` and `bigNumberStrings` forces big numbers
+  (BIGINT and DECIMAL columns) to be always returned as JavaScript String objects (Default: `false`).
+  Enabling `supportBigNumbers` but leaving `bigNumberStrings` disabled will return big numbers as String
+  objects only when they cannot be accurately represented with [JavaScript Number objects](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5)
+  (which happens when they exceed the [-2^53, +2^53] range), otherwise they will be returned as
+  Number objects. This option is ignored if `supportBigNumbers` is disabled.
+* `dateStrings`: Force date types (TIMESTAMP, DATETIME, DATE) to be returned as strings rather then
+   inflated into JavaScript Date objects. Can be `true`/`false` or an array of type names to keep as
+   strings. (Default: `false`)
+* `debug`: Prints protocol details to stdout. Can be `true`/`false` or an array of packet type names
+   that should be printed. (Default: `false`)
+* `trace`: Generates stack traces on `Error` to include call site of library
+   entrance ("long stack traces"). Slight performance penalty for most calls.
+   (Default: `true`)
+* `multipleStatements`: Allow multiple mysql statements per query. Be careful
+  with this, it could increase the scope of SQL injection attacks. (Default: `false`)
+* `flags`: List of connection flags to use other than the default ones. It is
+  also possible to blacklist default ones.
+* `ssl`: object with ssl parameters or a string containing name of ssl profile.
+* `acquireTimeout`: The milliseconds before a timeout occurs during the connection
+  acquisition. This is slightly different from `connectTimeout`, because acquiring
+  a pool connection does not always involve making a connection. (Default: `10000`)
+* `waitForConnections`: Determines the pool's action when no connections are
+  available and the limit has been reached. If `true`, the pool will queue the
+  connection request and call it when one becomes available. If `false`, the
+  pool will immediately call back with an error. (Default: `true`)
+* `connectionLimit`: The maximum number of connections to create at once.
+  (Default: `10`)
+* `queueLimit`: The maximum number of connection requests the pool will queue
+  before returning an error from `getConnection`. If set to `0`, there is no
+  limit to the number of queued connection requests. (Default: `0`)
+
+_For a full list please visit this [link](https://github.com/mysqljs/mysql#connection-options)._  
+
+# Instance Configuration Options
+
+Below are the options available to tweak the behaviour of the pool manager:
+
+* `idleCheckInterval`: How often to check if connections are idle before closing them. (in ms)
+* `maxConnextionTimeout`: The length of time to wait before connections are removed from the pool. (in ms)
+* `idlePoolTimeout`: The length of time to wait before closing the connection pool if all connections are idle. (in ms)
+* `errorLimit`: The number of times to attempt getting a connection / starting a connection pool.  
+* `preInitDelay`: How long to wait between attempts to initialise a connection pool. (in ms)
+* `sessionTimeout`: Sets a mySQL `wait_timeout` on the connection session to close connections if your process blocks. (in ms)
+* `onConnectionAcquire`: Executed when a connection is _acquired_ from the pool. _(optional)_
+* `onConnectionConnect`: Executed when a new connection is _made_ within the pool. _(optional)_
+* `onConnectionEnqueue`: Executed when a query has been _queued_ to wait for an available connection. _(optional)_
+* `onConnectionRelease`: Executed when a connection is _released_ back to the pool. _(optional)_
+
+# Available Methods
+
+Here is a list of available methods:
+
+* checkPool(pool): Checks the status of the connection pool. Returns `boolean`.
+* closePool(pool):  Closes the connection pool. Returns `undefined`.
+* closePoolNow(callback): Close the currently active connection pool.  Returns `undefined`.
+* createPool(mySQLSettings):  Creates a connection pool. Returns `instance`.
+* escapeValue(data): In order to avoid SQL injection attacks, you should always escape any user provided data. Returns `string`.
+* query(sql):  This method allows you to perform a query. Returns `(result = [], error = {})`.
+* config(options): Allows you to change the instance / mySQL settings of an instance. Returns `undefined`.
+
+# Basic Usage
+
+## Simple Insertion Script
+
+A simple script to bulk insert data into a table. Make sure you have an idea of how many connection you expect to queue at once and adjust your `queueLimit` accordingly. If this limit is reached your query callbacks will be called immediately with an error.
 
 ```
+"use strict"
+
+// Load modules
+const PoolManager = require('mysql-connection-pool-manager');
+
 const options = {
   idleCheckInterval: 1000,
   maxConnextionTimeout: 30000,
-  idleTimeout: 10000,
-  errorLimit: 100,
+  idlePoolTimeout: 3000,
+  errorLimit: 5,
   preInitDelay: 50,
   sessionTimeout: 60000,
-  mysqlSettings: {
+  onConnectionAcquire: () => { console.log("Acquire"); },
+  onConnectionConnect: () => { console.log("Connect"); },
+  onConnectionEnqueue: () => { console.log("Enqueue"); },
+  onConnectionRelease: () => { console.log("Release"); },
+  mySQLSettings: {
     host: 'localhost',
-    user: 'db_user',
-    password: 'db_password',
-    database: 'db_database',
+    user: 'root',
+    password: 'Fire$man22choP',
+    database: 't_dd_shop',
     port: '3306',
     socketPath: '/var/run/mysqld/mysqld.sock',
     charset: 'utf8',
@@ -43,24 +151,18 @@ const options = {
     debug: false
   }
 }
-```
 
-Please note********************
+// Initialising the instance
+const mySQL = PoolManager(options);
 
-# Basic Usage
+// Execute 30000 queries at once...
+for (var i = 0; i < 30000; i++) {
+    var count = i;
+    mySQL.query(`INSERT INTO table_name VALUES (${count}, ${count}, ${count}, ${count});`,(res, msg) => {
+      console.log(res,msg);
+    });
+}
 
-Below is an example of the basic usage of the module:
-
-## Simple Insertion Script
-
-```
-Example 1
-```
-
-## Switching Servers Halfway Through Execution
-
-```
-Example 2
 ```
 
 # Contributing
