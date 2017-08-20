@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "pretest": "cd ./test/ && bash setup.sh && cd ./../",
-    "test": "cd ./test/ && node start-test.js"
+    "test": "cd ./test/ && node start-test.js",
+    "deploy-patch": "git add -A && git commit -a -m 'module update: patch' && npm version patch && npm publish",
+    "deploy-minor": "git add -A && git commit -a -m 'module update: minor' && npm version minor && npm publish",
+    "deploy-major": "git add -A && git commit -a -m 'module update: major' && npm version major && npm publish"
   },
   "repository": {
     "type": "git",
