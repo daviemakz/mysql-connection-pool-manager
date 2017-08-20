@@ -1,42 +1,20 @@
 # MySQL Connection Pool Manager
 
-This is a production level Node.JS mySQL wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql). This module allows for intelligent management &amp; load balancing of mySQL connection pools. It is written in JavaScript, does not require compiling, and is MIT licensed. Its designed to be used by persistent and self-terminating processes.  
+This is a production level Node.JS mySQL connection pool wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql).
 
-# Description & Advantages
+# Summary
 
-Using the standard `mysql.createPool()`, connections are lazily created by the pool. If you configure the pool to allow up to 100 connections, but only ever use 5 simultaneously, only 5 connections will be made. However if you configure it for 500 connections and use all 500 they will *remain open* for the durations of the process, even if they are idle!
+This module allows for intelligent management &amp; load balancing of mySQL connection pools. It is written in JavaScript, does not require compiling, and is MIT licensed. Its designed to be used by persistent and self-terminating processes.  
 
-This means if your MySQL Server `max_connections` is 510 your system will only have *10* mySQL connections available until your MySQL Server closes them (depends on what you have set your `wait_timeout` to) or your application closes! The only way to free them up is to manually close the connections via the pool instance or close the pool.
+# Description
 
-This module was created to fix this issue and *automatically* scale the number of connections dependant on the load. Inactive connections are closed and idle connection pools are eventually closed if there has not been any activity.
+Using the standard `mysql.createPool()`, connections are lazily created by the pool. If you configure the pool to allow up to 100 connections, but only ever use 5 simultaneously, only 5 connections will be made. However if you configure it for 500 connections and use all 500 they will **remain open** for the durations of the process, even if they are idle!
 
-When a new query comes in, the pool is automatically initialised if its been closed and remains so as long as its in use. All this happens under the hood so they is no need to do anything but perform queries as you would normally. There is also no need to invest too heavily into flow control:
+This means if your MySQL Server `max_connections` is 510 your system will only have **10** mySQL connections available until your MySQL Server closes them (depends on what you have set your `wait_timeout` to) or your application closes! The only way to free them up is to manually close the connections via the pool instance or close the pool.
 
-The following script will request the insertion of 50,000 rows into a database at once. As long as your `queryLimit` is greater than this all the queries will succeed...
+This module was created to fix this issue and **automatically** scale the number of connections dependant on the load. Inactive connections are closed and idle connection pools are eventually closed if there has not been any activity.
 
-```
-"use strict"
-
-// Load modules
-const PoolManager = require('mysql-connection-pool-manager');
-
-// Options
-const options = {
-  ...example settings
-}
-
-// Initialising the instance
-const mySQL = PoolManager(options);
-
-// Execute 50000 queries at once...
-for (var i = 0; i < 50000; i++) {
-  var count = i;
-  mySQL.query(`INSERT INTO tableName VALUES (${count}, ${count}, ${count}, ${count});`,(res, msg) => {
-    console.log(res,msg);
-  });
-}
-
-```
+When a new query comes in, the pool is automatically initialised if its been closed and remains so as long as its in use. All this happens under the hood so they is no need to do anything but perform queries as you would normally. There is also no need to invest too heavily into flow control as this is taken care of by the module.
 
 # Installation
 
