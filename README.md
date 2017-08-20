@@ -2,7 +2,39 @@
 
 This is a production level Node.JS mySQL wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql). This module allows for intelligent management &amp; load balancing of mySQL connection pools. It is written in JavaScript, does not require compiling, and is MIT licensed. Its designed to be used by persistent and self-terminating processes.  
 
-For example, most connection pools keep connections open for the duration of the process, and relies on the mySQL server terminating the process. With this module you can manage the connection count and release unused mySQL connections amongst other things.  
+Using the standard `mysql.createPool()`, connections are lazily created by the pool. If you configure the pool to allow up to 100 connections, but only ever use 5 simultaneously, only 5 connections will be made. However if you configure it for 500 connections and use all 500 they will *remain open* for the durations of the process, even if they are idle!
+
+This means if your MySQL Server `max_connections` is 510 your system will only have *10* mySQL connections available until your MySQL Server closes them (depends on what you have set your `wait_timeout` to) or your application closes! The only way to free them up is to manually close the connections via the pool instance or close the pool.
+
+This module was created to fix this issue and *automatically* scale the number of connections dependant on the load. Inactive connections are closed and idle connection pools are eventually closed if there has not been any activity.
+
+When a new query comes in, the pool is automatically initialised if its been closed and remains so as long as its in use. All this happens under the hood so they is no need to do anything but perform queries as you would normally. There is also no need to invest too heavily into flow control:
+
+The following script will request the insertion of 50,000 rows into a database at once. As long as your `queryLimit` is greater than this all the queries will succeed...
+
+```
+"use strict"
+
+// Load modules
+const PoolManager = require('mysql-connection-pool-manager');
+
+// Options
+const options = {
+  ...example settings
+}
+
+// Initialising the instance
+const mySQL = PoolManager(options);
+
+// Execute 50000 queries at once...
+for (var i = 0; i < 50000; i++) {
+  var count = i;
+  mySQL.query(`INSERT INTO tableName VALUES (${count}, ${count}, ${count}, ${count});`,(res, msg) => {
+    console.log(res,msg);
+  });
+}
+
+```
 
 # Install
 
@@ -80,24 +112,24 @@ When establishing a connection, you can set the following options:
   (Default: `10`)
 * `queueLimit`: The maximum number of connection requests the pool will queue
   before returning an error from `getConnection`. If set to `0`, there is no
-  limit to the number of queued connection requests. (Default: `0`)
+  limit to the number of queued connection requests. (Default: `0`)  
 
 _For a full list please visit this [link](https://github.com/mysqljs/mysql#connection-options)._  
 
 # Instance Configuration Options
 
-Below are the options available to tweak the behaviour of the pool manager:
+Below are the options available to tweak the behaviour of the pool manager (in ms):
 
-* `idleCheckInterval`: How often to check if connections are idle before closing them. (in ms)
-* `maxConnextionTimeout`: The length of time to wait before connections are removed from the pool. (in ms)
-* `idlePoolTimeout`: The length of time to wait before closing the connection pool if all connections are idle. (in ms)
+* `idleCheckInterval`: How often to check if connections are idle before closing them. _(required)_
+* `maxConnextionTimeout`: The length of time to wait before connections are removed from the pool. _(required)_
+* `idlePoolTimeout`: The length of time to wait before closing the connection pool if all connections are idle. _(required)_
 * `errorLimit`: The number of times to attempt getting a connection / starting a connection pool.  
-* `preInitDelay`: How long to wait between attempts to initialise a connection pool. (in ms)
-* `sessionTimeout`: Sets a mySQL `wait_timeout` on the connection session to close connections if your process blocks. (in ms)
-* `onConnectionAcquire`: Executed when a connection is _acquired_ from the pool. _(optional)_
-* `onConnectionConnect`: Executed when a new connection is _made_ within the pool. _(optional)_
-* `onConnectionEnqueue`: Executed when a query has been _queued_ to wait for an available connection. _(optional)_
-* `onConnectionRelease`: Executed when a connection is _released_ back to the pool. _(optional)_
+* `preInitDelay`: How long to wait between attempts to initialise a connection pool. _(required)_
+* `sessionTimeout`: Sets a mySQL `wait_timeout` on the connection session to close connections if your process blocks. _(required)_
+* `onConnectionAcquire`: When a connection is _acquired_ from the pool. _(optional)_
+* `onConnectionConnect`: When a new connection is _made_ within the pool. _(optional)_
+* `onConnectionEnqueue`: When a query has been _queued_ to wait for an available connection. _(optional)_
+* `onConnectionRelease`: When a connection is _released_ back to the pool. _(optional)_
 
 # Available Methods
 
@@ -109,7 +141,7 @@ Here is a list of available methods:
 * `createPool(mySQLSettings)`:  Creates a connection pool. Returns `instance`.
 * `escapeValue(data)`: In order to avoid SQL injection attacks, you should always escape any user provided data. Returns `string`.
 * `query(sql)`:  This method allows you to perform a query. Returns `(result = [], error = {})`.
-* `config(options)`: Allows you to change the instance / mySQL settings of an instance. Returns `undefined`.
+* `config(options)`: Allows you to change the instance / mySQL settings of an instance. Returns `undefined`.  
 
 You can also access the [mysqljs/mysql](https://github.com/mysqljs/mysql) directly like so...
 
@@ -148,13 +180,14 @@ connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 connection.end();
 ```
 
+
 ...and you can still use the module normally!
 
 # Basic Usage
 
 ## Simple Insertion Script
 
-A simple script to bulk insert data into a table. Make sure you have an idea of how many connection you expect to queue at once and adjust your `queueLimit` accordingly. If this limit is reached your query callbacks will be called immediately with an error.
+A simple script to bulk insert data into a table. Make sure you have an idea of how many connection you expect to queue at once and adjust your `queueLimit` accordingly. If this limit is reached the query callback will be called with an error.
 
 ```
 "use strict"
