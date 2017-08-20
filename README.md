@@ -2,6 +2,8 @@
 
 This is a production level Node.JS mySQL wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql). This module allows for intelligent management &amp; load balancing of mySQL connection pools. It is written in JavaScript, does not require compiling, and is MIT licensed. Its designed to be used by persistent and self-terminating processes.  
 
+# Description & Advantages
+
 Using the standard `mysql.createPool()`, connections are lazily created by the pool. If you configure the pool to allow up to 100 connections, but only ever use 5 simultaneously, only 5 connections will be made. However if you configure it for 500 connections and use all 500 they will *remain open* for the durations of the process, even if they are idle!
 
 This means if your MySQL Server `max_connections` is 510 your system will only have *10* mySQL connections available until your MySQL Server closes them (depends on what you have set your `wait_timeout` to) or your application closes! The only way to free them up is to manually close the connections via the pool instance or close the pool.
@@ -36,7 +38,7 @@ for (var i = 0; i < 50000; i++) {
 
 ```
 
-# Install
+# Installation
 
 To install run the following command in the terminal:
 
@@ -239,4 +241,4 @@ for (var i = 0; i < 30000; i++) {
 
 # Contributing
 
-All contributions are welcome, please read my [CONTRIBUTING.md](https://github.com/daviemakz/mysql-connection-pool-manager/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/daviemakz/mysql-connection-pool-manager/pulls) or as [GitHub issues](https://github.com/daviemakz/mysql-connection-pool-manager/issues). If you'd like to improve code, please feel free!
+All contributions are very welcome, please read my [CONTRIBUTING.md](https://github.com/daviemakz/mysql-connection-pool-manager/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/daviemakz/mysql-connection-pool-manager/pulls) or as [GitHub issues](https://github.com/daviemakz/mysql-connection-pool-manager/issues). If you'd like to improve code, please feel free!
