@@ -1,6 +1,6 @@
 {
   "name": "mysql-connection-pool-manager",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "This is a Node.JS API wrapper which allows for intelligent management & load balancing mysql connection pools.",
   "main": "index.js",
   "scripts": {
