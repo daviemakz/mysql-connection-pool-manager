@@ -1,24 +1,24 @@
 # Ensure latest packages
-apt-get -y update; apt-get -y upgrade; apt-get -y dist-upgrade; apt-get -y autoremove; apt-get -y autoclean;
+sudo apt-get -y update; apt-get -y upgrade; apt-get -y dist-upgrade; apt-get -y autoremove; apt-get -y autoclean;
 
 # Pre setup variables
-echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections
+sudo echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections
 
 # Default mySQL Settings
 mysqlUser='root'
 mysqlPass='te5amatRasTe'
 
 # Setup MySQL Configuration
-echo "mysql-server mysql-server/root_password password $mysqlPass" | debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password $mysqlPass" | debconf-set-selections
+sudo echo "mysql-server mysql-server/root_password password $mysqlPass" | debconf-set-selections
+sudo echo "mysql-server mysql-server/root_password_again password $mysqlPass" | debconf-set-selections
 
 # Pre installation packages
-apt-get update
-apt-get install --no-install-recommends -y tzdata
-apt-get install -y mysql-server apt-utils git
+sudo apt-get update
+sudo apt-get install --no-install-recommends -y tzdata
+sudo apt-get install -y mysql-server apt-utils git
 
 # Start mySQL Server
-service mysql start
+sudo service mysql start
 
 # Set Correct Timezone
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root "-p$mysqlPass" mysql
