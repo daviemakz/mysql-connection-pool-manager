@@ -21,11 +21,11 @@ mysqlPass=''
 #sudo service mysql start
 
 # Setup MySQL Test Database []
-mysql --user="$mysqlUser" --password="$mysqlPass" --database=mysql --execute="DROP DATABASE IF EXISTS database_test; CREATE DATABASE IF NOT EXISTS database_test;"
-mysql --user="$mysqlUser" --password="$mysqlPass" database_test < ./pipelines/mysql/database_test.sql
+mysql --user="$mysqlUser" --database=mysql --execute="DROP DATABASE IF EXISTS database_test; CREATE DATABASE IF NOT EXISTS database_test;"
+mysql --user="$mysqlUser" database_test < ./pipelines/mysql/database_test.sql
 
 # Setup MySQL Timezone
-mysql --user="$mysqlUser" --password="$mysqlPass" --database=mysql --execute="SET GLOBAL time_zone = 'Europe/London';"
+mysql --user="$mysqlUser" --database=mysql --execute="SET GLOBAL time_zone = 'Europe/London';"
 
 # Setup MySQL Max Connections
-mysql --user="$mysqlUser" --password="$mysqlPass" --database=mysql --execute="SET GLOBAL max_connections = 5000;"
+mysql --user="$mysqlUser" --database=mysql --execute="SET GLOBAL max_connections = 5000;"
