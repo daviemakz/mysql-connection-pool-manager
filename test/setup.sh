@@ -1,5 +1,5 @@
 # Ensure latest packages
-sudo apt-get -y update; apt-get -y upgrade; apt-get -y dist-upgrade; apt-get -y autoremove; apt-get -y autoclean;
+sudo apt-get -y update; sudo apt-get -y upgrade; sudo apt-get -y dist-upgrade; sudo apt-get -y autoremove; sudo apt-get -y autoclean;
 
 # Pre setup variables
 sudo echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections
@@ -15,7 +15,7 @@ sudo echo "mysql-server mysql-server/root_password_again password $mysqlPass" | 
 # Pre installation packages
 sudo apt-get update
 sudo apt-get install --no-install-recommends -y tzdata
-sudo apt-get install -y mysql-server apt-utils git
+sudo apt-get install -y mysql-server-5.5 apt-utils git
 
 # Start mySQL Server
 sudo service mysql start
