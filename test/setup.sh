@@ -5,7 +5,7 @@
 #sudo echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections
 
 # Default mySQL Settings
-mysqlUser='travis'
+mysqlUser='root'
 mysqlPass=''
 
 # Setup MySQL Configuration
