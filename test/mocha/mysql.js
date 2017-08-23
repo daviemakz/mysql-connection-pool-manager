@@ -1,9 +1,7 @@
 'use strict';
 
 // Load assertions & framework
-const Assert = require('assert');
 const Promise = require("bluebird");
-const Chai = require('chai');
 
 // Load module
 const PoolManager = require('./../../');
@@ -36,7 +34,7 @@ const options = {
     , queueLimit: 15000
     , debug: false
   }
-}
+};
 
 // Initialising the instance
 const mySQL = PoolManager(options);
@@ -49,21 +47,22 @@ describe('mysql', function() {
       var count = i;
       mySQL.query(
         `INSERT IGNORE INTO test_table VALUES (${count}, ${count});`
-        , (res, msg) => {});
+        , () => {});
     }
   });
 
   var inc = 0;
 
   for(var i = 0; i < 10000; i++) {
-      this.timeout(30000);
-      it(`pool query test - many connections`, function() {
+    this.timeout(30000);
+    it(`pool query test - query number: #${inc}`, function() {
       return new Promise(function(resolve, reject) {
         inc++;
-        mySQL.query(`SELECT * FROM test_table WHERE column_one=${inc}`, (res, msg) => {
-          console.log(res,msg);
-          res.length > 0 ? resolve() : reject();
-        })
+        mySQL.query(
+          `SELECT * FROM test_table WHERE column_one=${inc}`, (
+            res, msg) => {
+            res.length > 0 ? resolve() : reject();
+          });
       });
     });
   }
