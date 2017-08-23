@@ -59,6 +59,7 @@ describe('mysql', function() {
       this.timeout(30000);
       return new Promise(function(resolve, reject) {
         mySQL.query(`SELECT * FROM test_table WHERE column_one=${count}`, (res, msg) => {
+          console.log(res,msg);
           res.length > 0 ? resolve() : reject();
         })
       });
