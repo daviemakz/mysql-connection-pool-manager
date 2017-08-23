@@ -1,0 +1,1 @@
+sudo docker rm $(sudo docker ps -a -q) && sudo docker run -it --volume=/home/david/dev/testing/kwizz-auto:/kwizz_auto --workdir="/kwizz_auto" --memory=4g --entrypoint=/bin/bash node:7.10.0
