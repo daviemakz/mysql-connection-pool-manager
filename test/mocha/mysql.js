@@ -55,11 +55,11 @@ describe('mysql', function() {
 
   for(var i = 0; i < 10000; i++) {
     this.timeout(30000);
-    it(`pool query test - query number: #${inc++}`, function() {
+    it(`connection query number: #${inc++}`, function() {
       return new Promise(function(resolve, reject) {
         mySQL.query(
           `SELECT * FROM test_table WHERE column_one=${inc}`, (
-            res, msg) => {
+            res) => {
             res.length > 0 ? resolve() : reject();
           });
       });
