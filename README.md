@@ -1,3 +1,4 @@
+  
 [![Build Status](https://travis-ci.org/daviemakz/mysql-connection-pool-manager.svg?branch=master)](https://travis-ci.org/daviemakz/mysql-connection-pool-manager)
 
 # MySQL Connection Pool Manager
