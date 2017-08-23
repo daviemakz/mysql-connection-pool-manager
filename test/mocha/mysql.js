@@ -33,7 +33,7 @@ const options = {
     , acquireTimeout: 10000
     , waitForConnections: true
     , connectionLimit: 1000
-    , queueLimit: 5000
+    , queueLimit: 15000
     , debug: false
   }
 }
