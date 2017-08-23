@@ -48,7 +48,7 @@ describe('mysql', function() {
     for(var i = 0; i < 10000; i++) {
       var count = i;
       mySQL.query(
-        `INSERT INTO test_table VALUES (${count}, ${count});`
+        `INSERT IGNORE INTO test_table VALUES (${count}, ${count});`
         , (res, msg) => {});
     }
   });
