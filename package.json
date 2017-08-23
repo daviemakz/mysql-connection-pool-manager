@@ -1,6 +1,6 @@
 {
   "name": "mysql-connection-pool-manager",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "This is a mySQL Connection Pool Manager wrapper powered by mysqljs/mysql and allows for intelligent management & load balancing mysql connection pools.",
   "main": "index.js",
   "scripts": {
