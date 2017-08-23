@@ -33,6 +33,9 @@
     "util": "^0.10.3"
   },
   "devDependencies": {
+    "assert": "^1.4.1",
+    "bluebird": "^3.5.0",
+    "chai": "^4.1.1",
     "graceful-fs": "^4.1.11",
     "mocha": "^3.5.0",
     "path": "^0.12.7"
