@@ -54,9 +54,9 @@ describe('mysql', function() {
   });
 
   for(var i = 0; i < 10000; i++) {
-    it(`pool query test - many connections`, function() {
       this.timeout(30000);
       var count = i;
+      it(`pool query test - many connections`, function() {
       return new Promise(function(resolve, reject) {
         mySQL.query(`SELECT * FROM test_table WHERE column_one=${count}`, (res, msg) => {
           console.log(res,msg);
