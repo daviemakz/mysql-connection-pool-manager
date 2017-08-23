@@ -53,12 +53,14 @@ describe('mysql', function() {
     }
   });
 
+  var inc = 0;
+
   for(var i = 0; i < 10000; i++) {
       this.timeout(30000);
       it(`pool query test - many connections`, function() {
-      var count = i;
       return new Promise(function(resolve, reject) {
-        mySQL.query(`SELECT * FROM test_table WHERE column_one=${count}`, (res, msg) => {
+        inc++;
+        mySQL.query(`SELECT * FROM test_table WHERE column_one=${inc}`, (res, msg) => {
           console.log(res,msg);
           res.length > 0 ? resolve() : reject();
         })
