@@ -51,7 +51,6 @@ describe('instance', function() {
     , 'closeIdleConnections'
     , 'closePool'
     , 'createPool'
-    , 'emitQueryError'
     , 'escapeValue'
     , 'getTimestamp'
     , 'poolActivity'
