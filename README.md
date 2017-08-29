@@ -1,6 +1,8 @@
 
 [![Build Status](https://travis-ci.org/daviemakz/mysql-connection-pool-manager.svg?branch=master)](https://travis-ci.org/daviemakz/mysql-connection-pool-manager)
-
+[![Dependencies Status](https://david-dm.org/daviemakz/mysql-connection-pool-manager/status.svg)](https://david-dm.org/daviemakz/mysql-connection-pool-manager)
+[![Development Dependencies Status](https://david-dm.org/daviemakz/mysql-connection-pool-manager/dev-status.svg)](https://david-dm.org/daviemakz/mysql-connection-pool-manager?type=dev)
+  
 # MySQL Connection Pool Manager
 
 This is a production level Node.JS mySQL connection pool wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql).
