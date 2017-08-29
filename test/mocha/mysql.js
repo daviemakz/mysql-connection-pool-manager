@@ -59,8 +59,8 @@ describe('mysql', function() {
       return new Promise(function(resolve, reject) {
         mySQL.query(
           `SELECT * FROM test_table WHERE column_one=${inc}`, (
-            res) => {
-            res.length > 0 ? resolve() : reject();
+            res, msg) => {
+            res.length > 0 ? resolve() : reject(msg);
           });
       });
     });
