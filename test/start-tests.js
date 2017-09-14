@@ -13,13 +13,13 @@ const DirectoryAll = ['./mocha/'];
 
 // Get all mocha test files
 DirectoryAll.forEach(function(element) {
-  FS.readdirSync(element).filter(function(file) {
-    return file.substr(-3) === '.js';
-  }).forEach(function(file) {
-    MochaInstanceAll.addFile(
-      PT.join(element, file)
-    );
-  });
+  FS.readdirSync(element)
+    .filter(function(file) {
+      return file.substr(-3) === '.js';
+    })
+    .forEach(function(file) {
+      MochaInstanceAll.addFile(PT.join(element, file));
+    });
 });
 
 // FUNCTION: Run all tests

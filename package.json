@@ -6,6 +6,7 @@
   "scripts": {
     "pretest": "cd ./test/ && bash setup.sh && cd ./../",
     "test": "cd ./test/ && node start-tests.js",
+    "format": "prettier --single-quote --trailing-comma --write './**/*.js'",
     "deploy-patch": "git commit -a -m 'module update: patch' && git push && npm version patch && npm publish",
     "deploy-minor": "git commit -a -m 'module update: minor' && git push && npm version minor && npm publish",
     "deploy-major": "git commit -a -m 'module update: major' && git push && npm version major && npm publish"
@@ -38,6 +39,7 @@
     "chai": "^4.1.1",
     "graceful-fs": "^4.1.11",
     "mocha": "^3.5.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "prettier": "^1.7.0"
   }
 }
