@@ -20,7 +20,7 @@ To use this module ensure you have installed the [mysqljs/mysql](https://github.
 
 Aftewards install this module normally:
 
-    npm install  mysql-connection-pool-manager --save
+    npm install mysql-connection-pool-manager --save
 
 Please note, currently this module supports: **[mysqljs/mysql](https://github.com/mysqljs/mysql) @ >= 2.13.0 < 3.0.0**  
 
