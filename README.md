@@ -1,9 +1,10 @@
+# MySQL Connection Pool Manager
+
+[![NPM](https://nodei.co/npm/mysql-connection-pool-manager.png?compact=true)](https://www.npmjs.com/package/mysql-connection-pool-manager)  
 
 [![Build Status](https://travis-ci.org/daviemakz/mysql-connection-pool-manager.svg?branch=master)](https://travis-ci.org/daviemakz/mysql-connection-pool-manager)
 [![Dependencies Status](https://david-dm.org/daviemakz/mysql-connection-pool-manager/status.svg)](https://david-dm.org/daviemakz/mysql-connection-pool-manager)
 [![Development Dependencies Status](https://david-dm.org/daviemakz/mysql-connection-pool-manager/dev-status.svg)](https://david-dm.org/daviemakz/mysql-connection-pool-manager?type=dev)
-  
-# MySQL Connection Pool Manager
 
 This is a production level Node.JS mySQL connection pool wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql).
 
@@ -13,9 +14,15 @@ This module allows for intelligent management &amp; load balancing of mySQL conn
 
 # Installation
 
-To install run the following command in the terminal:
+To use this module ensure you have installed the [mysqljs/mysql](https://github.com/mysqljs/mysql) module (if you haven’t already):
 
-    npm install mysql-connection-pool-manager --save
+    npm install mysql@2.x --save
+
+Aftewards install this module normally:
+
+    npm install  mysql-connection-pool-manager --save
+
+Please note, currently this module supports: **[mysqljs/mysql](https://github.com/mysqljs/mysql) @ >= 2.13.0 < 3.0.0**  
 
 # Features
 
