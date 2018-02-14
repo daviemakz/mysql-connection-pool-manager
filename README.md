@@ -1,5 +1,7 @@
 # MySQL Connection Pool Manager
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/daviemakz/mysql-connection-pool-manager.svg)](https://greenkeeper.io/)
+
 [![NPM](https://nodei.co/npm/mysql-connection-pool-manager.png?compact=true)](https://www.npmjs.com/package/mysql-connection-pool-manager)  
 
 [![Build Status](https://travis-ci.org/daviemakz/mysql-connection-pool-manager.svg?branch=master)](https://travis-ci.org/daviemakz/mysql-connection-pool-manager)
