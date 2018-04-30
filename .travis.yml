@@ -4,3 +4,4 @@ services:
   - mysql
 node_js:
   - "7"
+  - "10"
