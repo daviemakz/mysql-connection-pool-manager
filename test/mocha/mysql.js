@@ -36,29 +36,49 @@ const options = {
   },
 };
 
+// Const Test Limit
+const testLimit = 10000;
+
 // Initialising the instance
 const mySQL = PoolManager(options);
 
 describe('mysql', function() {
-  before(function() {
+  // Set variables
+  var inc = 0;
+  // Run before tests
+  before(function(done) {
+    // Count number of successes
+    var completedQueries = 0;
+    // Set timeout
     this.timeout(30000);
-    for (var i = 0; i < 10000; i++) {
+    // Put some stuff into the database
+    for (var i = 0; i < testLimit; i++) {
+      // Get count
       var count = i;
+      // Perform query
       mySQL.query(
         `INSERT IGNORE INTO test_table VALUES (${count}, ${count});`,
-        () => {}
+        () => {
+          // Increment completed queries
+          completedQueries++;
+          // Check if all is finished then contine test
+          testLimit === completedQueries && done();
+        }
       );
     }
   });
-
-  var inc = 0;
-
-  for (var i = 0; i < 10000; i++) {
+  // Build test cases
+  for (var i = 0; i < testLimit; i++) {
+    // Set timeout
     this.timeout(30000);
-    it(`connection query number: #${inc++}`, function() {
+    // Start tests
+    it(`connection query number: #${i}`, function() {
       return new Promise(function(resolve, reject) {
+        // Increment count
+        var curInc = inc++;
+        // Return new promise
         mySQL.query(
-          `SELECT * FROM test_table WHERE column_one=${inc}`,
+          `SELECT * FROM test_table WHERE column_one=${curInc};`,
           (res, msg) => {
             res.length > 0 ? resolve() : reject(msg);
           }
