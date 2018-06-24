@@ -33,7 +33,7 @@
     "util": "^0.11.0"
   },
   "peerDependencies": {
-    "mysql": ">= 2.13.0 < 3.0.0"
+    "mysql": ">= 2.14.0 < 3.0.0"
   },
   "devDependencies": {
     "assert": "^1.4.1",
