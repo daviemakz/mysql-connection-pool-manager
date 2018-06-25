@@ -71,7 +71,6 @@ describe('instance', function() {
   ].forEach(prop => {
     it(`checking instance property: ${prop}`, function() {
       return new Promise(function(resolve, reject) {
-        console.log(mySQL);
         mySQL.hasOwnProperty(prop)
           ? resolve()
           : reject(`property not found: ${prop}`);
