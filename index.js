@@ -4,17 +4,16 @@
 const autoBind = require('auto-bind');
 
 // Load library modules
-const Core = require('./lib/pool');
+const PoolCore = require('./lib/pool');
 
 // Build instance
-class MySQLPoolManagerInstance extends Core {
+class MySQLPoolManagerInstance extends PoolCore {
   // Initial constructor
   constructor(options) {
     // Allow access to 'this'
     super() && autoBind(this);
-    console.log(this);
     // Build configuration
-    return this.config(options);
+    return this.config(options) || true;
   }
 
   // Function: Assign settings
