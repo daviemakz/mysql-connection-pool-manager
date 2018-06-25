@@ -12,6 +12,7 @@ class MySQLPoolManagerInstance extends Core {
   constructor(options) {
     // Allow access to 'this'
     super() && autoBind(this);
+    console.log(this);
     // Build configuration
     return this.config(options);
   }
