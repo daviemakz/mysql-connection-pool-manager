@@ -13,7 +13,7 @@ class MySQLPoolManagerInstance extends PoolCore {
     // Allow access to 'this'
     super() && autoBind(this);
     // Build configuration
-    return this.config(options) || true;
+    return this.config(options) || this;
   }
 
   // Function: Assign settings
