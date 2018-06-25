@@ -1,5 +1,8 @@
 'use strict';
 
+// Load NPM modules
+const autoBind = require('auto-bind');
+
 // Load library modules
 const Core = require('./lib/pool');
 
@@ -8,9 +11,7 @@ class MySQLPoolManagerInstance extends Core {
   // Initial constructor
   constructor(options) {
     // Allow access to 'this'
-    super();
-    // Bind methods
-    this.config = this.config.bind(this);
+    super() && autoBind(this);
     // Build configuration
     return this.config(options);
   }
