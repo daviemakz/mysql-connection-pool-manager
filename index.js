@@ -4,7 +4,7 @@
 const Core = require('./lib/pool');
 
 // Build instance
-class Instance extends Core {
+class MySQLPoolManagerInstance extends Core {
   // Initial constructor
   constructor(options) {
     // Allow access to 'this'
@@ -12,7 +12,7 @@ class Instance extends Core {
     // Bind methods
     this.config = this.config.bind(this);
     // Build configuration
-    this.config(options);
+    return this.config(options);
   }
 
   // Function: Assign settings
@@ -40,11 +40,9 @@ class Instance extends Core {
       throw new Error(`MySQL settings are not defined or not an object!`);
     }
     // Spread options to this
-    this.options = Object.assign({}, options);
-    // Return
-    return;
+    return (this.options = Object.assign({}, options));
   }
 }
 
 // Exports
-module.exports = options => new Instance(options);
+module.exports = options => new MySQLPoolManagerInstance(options);
