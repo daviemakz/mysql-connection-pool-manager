@@ -11,6 +11,7 @@ class MySQLPoolManagerInstance extends PoolCore {
     super();
     // Bind methods
     ['config'].forEach(func => (this[func] = this[func].bind(this)));
+    console.log('MySQLPoolManagerInstance: ', this);
     // Check configuration
     return this.config(options);
   }
