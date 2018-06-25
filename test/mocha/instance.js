@@ -49,6 +49,7 @@ describe('instance', function() {
     'checkPool',
     'checkTimestamp',
     'closeIdleConnections',
+    'closeConnection',
     'closePool',
     'createPool',
     'escapeValue',

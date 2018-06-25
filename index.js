@@ -1,18 +1,19 @@
 'use strict';
 
+// Load NPM modules
+const autoBind = require('auto-bind');
+
 // Load library modules
-const Core = require('./lib/pool');
+const PoolCore = require('./lib/pool');
 
 // Build instance
-class Instance extends Core {
+class MySQLPoolManagerInstance extends PoolCore {
   // Initial constructor
   constructor(options) {
     // Allow access to 'this'
-    super();
-    // Bind methods
-    this.config = this.config.bind(this);
-    // Build configuration
-    this.config(options);
+    super() && autoBind(this);
+    // Check configuration
+    return this.config(options);
   }
 
   // Function: Assign settings
@@ -40,11 +41,9 @@ class Instance extends Core {
       throw new Error(`MySQL settings are not defined or not an object!`);
     }
     // Spread options to this
-    this.options = Object.assign({}, options);
-    // Return
-    return;
+    return (this.options = Object.assign({}, options)) && this;
   }
 }
 
 // Exports
-module.exports = options => new Instance(options);
+module.exports = options => new MySQLPoolManagerInstance(options);
