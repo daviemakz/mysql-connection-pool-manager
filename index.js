@@ -1,8 +1,5 @@
 'use strict';
 
-// Load NPM modules
-const autoBind = require('auto-bind');
-
 // Load library modules
 const PoolCore = require('./lib/pool');
 
@@ -11,11 +8,11 @@ class MySQLPoolManagerInstance extends PoolCore {
   // Initial constructor
   constructor(options) {
     // Allow access to 'this'
-    super() && autoBind(this);
-    // Build configuration
-    console.log('MySQLPoolManagerInstance');
-    console.log(this);
-    return this.config(options) || this;
+    super();
+    // Bind methods
+    ['config'].forEach(func => (this[func] = this[func].bind(this)));
+    // Check configuration
+    return this.config(options);
   }
 
   // Function: Assign settings
