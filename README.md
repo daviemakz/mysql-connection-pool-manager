@@ -1,6 +1,7 @@
 # MySQL Connection Pool Manager
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/daviemakz/mysql-connection-pool-manager.svg)](https://greenkeeper.io/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdaviemakz%2Fmysql-connection-pool-manager.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdaviemakz%2Fmysql-connection-pool-manager?ref=badge_shield)
 
 [![NPM](https://nodei.co/npm/mysql-connection-pool-manager.png?compact=true)](https://www.npmjs.com/package/mysql-connection-pool-manager)
 
@@ -232,3 +233,7 @@ for (var i = 0; i < 30000; i++) {
 # Contributing
 
 All contributions are very welcome, please read my [CONTRIBUTING.md](https://github.com/daviemakz/mysql-connection-pool-manager/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/daviemakz/mysql-connection-pool-manager/pulls) or as [GitHub issues](https://github.com/daviemakz/mysql-connection-pool-manager/issues). If you'd like to improve code, please feel free!
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdaviemakz%2Fmysql-connection-pool-manager.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdaviemakz%2Fmysql-connection-pool-manager?ref=badge_large)
