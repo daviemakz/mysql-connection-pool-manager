@@ -37,7 +37,7 @@
     "mysql": ">= 2.14.0 < 3.0.0"
   },
   "devDependencies": {
-    "assert": "^1.4.1",
+    "assert": "^2.0.0",
     "bluebird": "^3.5.0",
     "chai": "^4.1.1",
     "graceful-fs": "^4.1.11",
