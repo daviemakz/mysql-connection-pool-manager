@@ -41,7 +41,7 @@
     "assert": "^2.0.0",
     "bluebird": "^3.5.0",
     "chai": "^4.1.1",
-    "graceful-fs": "^4.1.11",
+    "graceful-fs": "^4.2.2",
     "mocha": "6.0.0",
     "mysql": "^2.15.0",
     "path": "^0.12.7",
