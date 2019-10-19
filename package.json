@@ -30,7 +30,7 @@
   "homepage": "https://github.com/daviemakz/mysql-connection-pool-manager#readme",
   "dependencies": {
     "async": "^3.0.1",
-    "auto-bind": "^2.0.0",
+    "auto-bind": "^3.0.0",
     "lodash": "^4.17.11",
     "md5": "^2.2.1"
   },
