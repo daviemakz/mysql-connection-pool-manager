@@ -6,6 +6,7 @@
 [![NPM](https://nodei.co/npm/mysql-connection-pool-manager.png?compact=true)](https://www.npmjs.com/package/mysql-connection-pool-manager)
 
 [![Build Status](https://travis-ci.org/daviemakz/mysql-connection-pool-manager.svg?branch=master)](https://travis-ci.org/daviemakz/mysql-connection-pool-manager)
+[![Downloads](https://img.shields.io/npm/dm/mysql-connection-pool-manager.svg)](https://www.npmjs.com/package/mysql-connection-pool-manager)
 [![Dependencies Status](https://david-dm.org/daviemakz/mysql-connection-pool-manager/status.svg)](https://david-dm.org/daviemakz/mysql-connection-pool-manager)
 [![Development Dependencies Status](https://david-dm.org/daviemakz/mysql-connection-pool-manager/dev-status.svg)](https://david-dm.org/daviemakz/mysql-connection-pool-manager?type=dev)
 
