@@ -1,7 +1,10 @@
 language: node_js
-sudo: true
 services:
   - mysql
+sudo: true
 node_js:
-  - "7"
-  - "10"
+  - '8'
+  - '10'
+  - '11'
+  - '12'
+  - 'lts/*'

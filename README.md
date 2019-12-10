@@ -12,6 +12,8 @@
 
 This is a production level Node.JS mySQL connection pool wrapper powered by [mysqljs/mysql](https://github.com/mysqljs/mysql).
 
+_Supports Node 8.x +_
+
 # Summary
 
 This module allows for intelligent management &amp; load balancing of mySQL connection pools. It is written in JavaScript, does not require compiling, and is MIT licensed. Its designed to be used by persistent and self-terminating processes.
@@ -235,6 +237,6 @@ for (var i = 0; i < 30000; i++) {
 
 All contributions are very welcome, please read my [CONTRIBUTING.md](https://github.com/daviemakz/mysql-connection-pool-manager/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/daviemakz/mysql-connection-pool-manager/pulls) or as [GitHub issues](https://github.com/daviemakz/mysql-connection-pool-manager/issues). If you'd like to improve code, please feel free!
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdaviemakz%2Fmysql-connection-pool-manager.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdaviemakz%2Fmysql-connection-pool-manager?ref=badge_large)
